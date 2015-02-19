@@ -6,7 +6,7 @@ static void hello( GtkWidget *widget, gpointer data )
 	g_print ("Hello World \n");
 }
 
-static gboolen delete_event( GtkWidget *widget,
+static gboolean delete_event( GtkWidget *widget,
 							 GdkEvent *event,
 							 gpointer data )
 {
