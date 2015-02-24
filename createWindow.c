@@ -6,6 +6,9 @@ static void hello( GtkWidget *widget, gpointer data )
 	g_print ("Hello World \n");
 }
 
+
+/* In case of returning FALSE, this will call the destroy function =0
+ * so, this is usefull for the "sure you want to exit?" dialogs (= */
 static gboolean delete_event( GtkWidget *widget,
 							 GdkEvent *event,
 							 gpointer data )
@@ -45,14 +48,14 @@ int main ( int argc, char *argv[] )
 	//sets border width
 	gtk_container_set_border_width (GTK_CONTAINER (window), 10);
 
-	//Creates button with label "Hello World"
+	//Creates button with label "Hello World", and allocates in memory
 	button = gtk_button_new_with_label ("Hello World");
 
 	//When button receives "clicked" signal, calls hello()
-	g_signal_connect (button, "clocked", G_CALLBACK (hello), NULL);
+	g_signal_connect (button, "clicked", G_CALLBACK (hello), NULL);
 
 	//This will cause the window to be destroyed by calling gtk_widget_destroy(window)
-	g_signal_connect_swapped (button, "clocked", G_CALLBACK (gtk_widget_destroy), window);
+	g_signal_connect_swapped (button, "clicked", G_CALLBACK (gtk_widget_destroy), window);
 
 	//packs the button into the window (a gtk container)
 	gtk_container_add (GTK_CONTAINER (window), button);
